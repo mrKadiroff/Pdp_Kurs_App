@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".fragments.MentorAddFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_mentor"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="#283593"
+        app:navigationIcon="@drawable/ic_vector__2_"
+        app:titleTextColor="@color/white"
+        app:title="Yangi mentor qoshish"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/familyasi"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/tahrirlash"
+        android:hint="familyasi"
+        android:padding="10dp"
+        android:textSize="20sp"
+        />
+    <EditText
+        android:id="@+id/ismi"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/tahrirlash"
+        android:hint="Ismi"
+        android:padding="10dp"
+        android:textSize="20sp"
+        />
+
+
+    <EditText
+        android:id="@+id/otchestva"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/tahrirlash"
+        android:hint="Otasining ismi"
+        android:padding="10dp"
+        android:textSize="20sp"
+        />
+
+    <Button
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="12dp"
+        android:text="Add"/>
+
+
+
+
+</LinearLayout>

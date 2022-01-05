@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/glavniFragment">
+
+    <fragment
+        android:id="@+id/glavniFragment"
+        android:name="com.example.pdp_dastur.fragments.GlavniFragment"
+        android:label="fragment_glavni"
+        tools:layout="@layout/fragment_glavni" >
+        <action
+            android:id="@+id/action_glavniFragment_to_kursFragment"
+            app:destination="@id/kursFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/kursFragment"
+        android:name="com.example.pdp_dastur.fragments.KursFragment"
+        android:label="fragment_kurs"
+        tools:layout="@layout/fragment_kurs" >
+        <action
+            android:id="@+id/action_kursFragment_to_mentorFragment"
+            app:destination="@id/mentorFragment" />
+        <action
+            android:id="@+id/action_kursFragment_to_kursChildFragment"
+            app:destination="@id/kursChildFragment" />
+        <action
+            android:id="@+id/action_kursFragment_to_viewPagerFragment"
+            app:destination="@id/viewPagerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mentorFragment"
+        android:name="com.example.pdp_dastur.fragments.MentorFragment"
+        android:label="fragment_mentor"
+        tools:layout="@layout/fragment_mentor" >
+        <action
+            android:id="@+id/action_mentorFragment_to_mentorAddFragment"
+            app:destination="@id/mentorAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mentorAddFragment"
+        android:name="com.example.pdp_dastur.fragments.MentorAddFragment"
+        android:label="fragment_mentor_add"
+        tools:layout="@layout/fragment_mentor_add" />
+    <fragment
+        android:id="@+id/kursChildFragment"
+        android:name="com.example.pdp_dastur.fragments.KursChildFragment"
+        android:label="fragment_kurs_child"
+        tools:layout="@layout/fragment_kurs_child" >
+        <action
+            android:id="@+id/action_kursChildFragment_to_kursStudentAddFragment"
+            app:destination="@id/kursStudentAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/kursStudentAddFragment"
+        android:name="com.example.pdp_dastur.fragments.KursStudentAddFragment"
+        android:label="fragment_kurs_student_add"
+        tools:layout="@layout/fragment_kurs_student_add" />
+    <fragment
+        android:id="@+id/viewPagerFragment"
+        android:name="com.example.pdp_dastur.fragments.ViewPagerFragment"
+        android:label="fragment_view_pager"
+        tools:layout="@layout/fragment_view_pager" >
+        <action
+            android:id="@+id/action_viewPagerFragment_to_groupAddFragment"
+            app:destination="@id/groupAddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/groupAddFragment"
+        android:name="com.example.pdp_dastur.fragments.GroupAddFragment"
+        android:label="fragment_group_add"
+        tools:layout="@layout/fragment_group_add" />
+    <fragment
+        android:id="@+id/proccessFragment"
+        android:name="com.example.pdp_dastur.guruh.ProccessFragment"
+        android:label="fragment_proccess"
+        tools:layout="@layout/fragment_proccess" >
+        <action
+            android:id="@+id/action_proccessFragment_to_proc_ResFragment"
+            app:destination="@id/proc_ResFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/proc_ResFragment"
+        android:name="com.example.pdp_dastur.guruh.Proc_ResFragment"
+        android:label="fragment_proc__res"
+        tools:layout="@layout/fragment_proc__res" />
+</navigation>

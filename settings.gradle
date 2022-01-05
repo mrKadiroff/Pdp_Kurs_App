@@ -1,0 +1,2 @@
+rootProject.name = "Pdp_dastur"
+include ':app'

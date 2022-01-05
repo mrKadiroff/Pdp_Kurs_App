@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.KursStudentAddFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_child"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="#283593"
+        app:navigationIcon="@drawable/ic_vector__2_"
+        app:titleTextColor="@color/white"
+        app:title="Talaba qo'shish"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/familiya"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/tahrirlash"
+        android:hint="Familiya"
+        android:padding="10dp"
+        android:textSize="20sp"
+        />
+
+    <EditText
+        android:id="@+id/ismii"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/tahrirlash"
+        android:hint="Ismi"
+        android:padding="10dp"
+        android:textSize="20sp"
+        />
+    <EditText
+        android:id="@+id/sana"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/tahrirlash"
+        android:hint="30/12/2021"
+        android:padding="10dp"
+        android:textSize="20sp"
+
+        />
+
+    <Spinner
+        android:id="@+id/mentor"
+        android:layout_width="match_parent"
+        android:background="@drawable/tahrirlash"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginBottom="10dp"
+        android:layout_height="?actionBarSize"
+        android:layout_marginTop="10dp"
+        />
+
+    <Spinner
+        android:id="@+id/guruh"
+        android:layout_width="match_parent"
+        android:background="@drawable/tahrirlash"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_height="?actionBarSize"
+        android:layout_marginTop="10dp"
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Saqlash"
+        android:layout_gravity="end"
+        android:layout_margin="12dp"/>
+
+
+
+</LinearLayout>
