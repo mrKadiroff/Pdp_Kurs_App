@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".guruh.Group_Student_AddFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_child"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="#283593"
+        app:navigationIcon="@drawable/ic_vector__2_"
+        app:titleTextColor="@color/white"
+        app:title="Talaba qo'shish"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <EditText
+        android:id="@+id/famil"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/tahrirlash"
+        android:hint="Familiya"
+        android:padding="10dp"
+        android:textSize="20sp"
+        />
+
+    <EditText
+        android:id="@+id/ismiigu"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/tahrirlash"
+        android:hint="Ismi"
+        android:padding="10dp"
+        android:textSize="20sp"
+        />
+
+
+    <EditText
+        android:id="@+id/otasining"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/tahrirlash"
+        android:hint="Ismi"
+        android:padding="10dp"
+        android:textSize="20sp"
+        />
+    <EditText
+        android:id="@+id/datee"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_margin="12dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/tahrirlash"
+        android:hint="30/12/2021"
+        android:padding="10dp"
+        android:textSize="20sp"
+
+        />
+
+    <Button
+        android:id="@+id/qoshish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Saqlash"
+        android:layout_gravity="end"
+        android:layout_margin="12dp"/>
+
+
+</LinearLayout>

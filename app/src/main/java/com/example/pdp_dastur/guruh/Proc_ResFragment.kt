@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.example.pdp_dastur.R
 import com.example.pdp_dastur.databinding.FragmentProcResBinding
 import com.example.pdp_dastur.databinding.FragmentProccessBinding
@@ -44,21 +45,40 @@ class Proc_ResFragment : Fragment() {
         binding = FragmentProcResBinding.inflate(layoutInflater,container, false)
 
         val guruuh = arguments?.getSerializable("pro") as Guruh
+        val yet = arguments?.getString("yet")
+        val start = arguments?.getString("start")
         myDbHelper = MyDbHelper(binding.root.context)
-
+        binding.tooolbarchik.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
         binding.groupName.text = guruuh.gr_name
         binding.groupTime.text = guruuh.gr_time
+        binding.tooolbarchik.title = guruuh.gr_name
 
-        binding.boshla.setOnClickListener {
-            val name = guruuh.gr_name
-            val kurss = guruuh.gr_kurs_id
-            val mentor = guruuh.gr_mentor_id
-            val time = guruuh.gr_time
-            val days = guruuh.gr_days
-            val open = guruuh.gr_open
-            val guruh = Guruh("dalban",kurss,mentor,time,days,"start")
-            myDbHelper.updateGroup(guruh)
+        if (yet!=null){
+            binding.tooolbarchik.inflateMenu(R.menu.add_menu)
+            binding.tooolbarchik.setOnMenuItemClickListener {
+                if (it.itemId == R.id.add){
+                    findNavController().navigate(R.id.group_Student_AddFragment)
+                }
+                true
+            }
 
+
+
+            binding.boshla.setOnClickListener {
+                guruuh.gr_open = "gone"
+                myDbHelper.updateGroup(guruuh)
+                binding.boshla.visibility = View.GONE
+                findNavController().popBackStack()
+            }
+        }
+
+
+
+
+        if (start!=null){
+            binding.boshla.visibility = View.GONE
         }
 
         return binding.root

@@ -16,7 +16,7 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle, v
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0->{
-                StartFragment()
+                StartFragment.newInstance(kurs)
             }
             1->{
                 ProccessFragment.newInstance(kurs)

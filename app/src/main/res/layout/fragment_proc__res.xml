@@ -2,9 +2,20 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".guruh.Proc_ResFragment">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tooolbarchik"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:title="app nomi"
+        app:titleTextColor="@color/white"
+        app:navigationIcon="@drawable/ic_vector__2_"
+        android:background="#2C3468"/>
 
 
     <TextView
@@ -44,5 +55,12 @@
         android:text="Darsni boshlash"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/talabalar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/st_list"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
 </LinearLayout>

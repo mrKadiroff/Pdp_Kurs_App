@@ -84,5 +84,23 @@
         android:id="@+id/proc_ResFragment"
         android:name="com.example.pdp_dastur.guruh.Proc_ResFragment"
         android:label="fragment_proc__res"
-        tools:layout="@layout/fragment_proc__res" />
+        tools:layout="@layout/fragment_proc__res" >
+        <action
+            android:id="@+id/action_proc_ResFragment_to_group_Student_AddFragment"
+            app:destination="@id/group_Student_AddFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.pdp_dastur.guruh.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_proc_ResFragment"
+            app:destination="@id/proc_ResFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/group_Student_AddFragment"
+        android:name="com.example.pdp_dastur.guruh.Group_Student_AddFragment"
+        android:label="fragment_group__student__add"
+        tools:layout="@layout/fragment_group__student__add" />
 </navigation>

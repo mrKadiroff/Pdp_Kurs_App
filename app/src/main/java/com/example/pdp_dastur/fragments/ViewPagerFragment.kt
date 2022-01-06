@@ -40,7 +40,7 @@ class ViewPagerFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
+    var onresumeChecker = false
     lateinit var binding: FragmentViewPagerBinding
     @SuppressLint("ResourceType")
     override fun onCreateView(
@@ -50,6 +50,7 @@ class ViewPagerFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentViewPagerBinding.inflate(layoutInflater,container,false)
         val kurs = arguments?.getSerializable("gruh") as Kurs
+
 
         val adapter=ViewPagerAdapter(childFragmentManager,lifecycle,kurs)
         binding.viewPager.adapter=adapter
@@ -124,13 +125,32 @@ class ViewPagerFragment : Fragment() {
     @SuppressLint("NotifyDataSetChanged")
     override fun onResume() {
         super.onResume()
-        val viewPager2 = view?.findViewById<ViewPager2>(R.id.view_pager)
-        val mPagerAdapter = viewPager2?.adapter
-        val currentPosition = viewPager2?.currentItem
-        mPagerAdapter?.notifyDataSetChanged()
-        viewPager2?.adapter = null
-        viewPager2?.adapter =mPagerAdapter
-        viewPager2?.setCurrentItem(currentPosition!!)
+        val kurs = arguments?.getSerializable("gruh") as Kurs
+        if (onresumeChecker){
+            val adapter=ViewPagerAdapter(childFragmentManager,lifecycle,kurs)
+            binding.viewPager.adapter=adapter
+            adapter.notifyDataSetChanged()
+        }
+
+
+
+//        val viewPager2 = view?.findViewById<ViewPager2>(R.id.view_pager)
+//        val mPagerAdapter = viewPager2?.adapter
+//        val currentPosition = viewPager2?.currentItem
+//        mPagerAdapter?.notifyDataSetChanged()
+//        viewPager2?.adapter = null
+//        viewPager2?.adapter =mPagerAdapter
+//        viewPager2?.setCurrentItem(currentPosition!!)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        onresumeChecker = false
+    }
+
+    override fun onDestroy() {
+        onresumeChecker = true
+        super.onDestroy()
     }
 
 

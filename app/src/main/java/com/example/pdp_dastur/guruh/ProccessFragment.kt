@@ -51,7 +51,7 @@ class ProccessFragment : Fragment() {
     lateinit var list1: ArrayList<Mentor>
     lateinit var mentorList: List<Mentor>
     lateinit var timeSpinner: TimeSpinner
-    lateinit var timeList: ArrayList<String>
+    lateinit var t_List: ArrayList<String>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,6 +64,14 @@ class ProccessFragment : Fragment() {
         mentorList = myDbHelper.getAllMentors()
         list1 = ArrayList()
 
+        if (mentorList.isNotEmpty()){
+            for (mentor in mentorList){
+                if (mentor.mentor_kurs_id?.kurs_name == param1?.kurs_name) {
+                    list1.add(mentor)
+                }
+            }
+        }
+        mentorSpinner = Mentor_Spinner(list1)
 
 
 
@@ -74,27 +82,25 @@ class ProccessFragment : Fragment() {
 
         if (param1 != null){
             for (guruh in groupList) {
-                if (guruh.gr_kurs_id?.kurs_name == param1?.kurs_name){
+                if (guruh.gr_kurs_id?.kurs_name == param1?.kurs_name && guruh.gr_open == "process"){
                     list.add(guruh)
                 }
             }
         }
 
-        //vaqt spinner bn ishlash
-//        val adapter_time = ArrayAdapter<String>(binding.root.context,R.layout.spinner_group,resources.getStringArray(R.array.vaqt))
-//        adapter_time.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
+        //Time spinner bilan ishlash
+        t_List = ArrayList()
 
-        timeList = ArrayList()
-
-        timeList.add("16:30 - 18:30")
-        timeList.add("19:00 - 21:00")
-        timeSpinner = TimeSpinner(timeList)
+        t_List.add("16:30 - 18:30")
+        t_List.add("19:00 - 21:00")
+        timeSpinner = TimeSpinner(t_List)
 
 
         groupRv = Group_Rv(list, object : Group_Rv.OnItemClickListener{
             override fun onItemStartClick(guruh: Guruh, position: Int, button: Button) {
                 var bundle = Bundle()
+                bundle.putString("yet", "yet")
                 bundle.putSerializable("pro",guruh)
                 bundle.putSerializable("krus",param1)
                 findNavController().navigate(R.id.proc_ResFragment,bundle)
@@ -111,19 +117,14 @@ class ProccessFragment : Fragment() {
                     LayoutInflater.from(binding.root.context),
                     null,
                     false)
-
-                if (mentorList.isNotEmpty()){
-                    for (mentor in mentorList){
-                        if (mentor.mentor_kurs_id?.kurs_name == param1?.kurs_name) {
-                            list1.add(mentor)
-                        }
-                    }
-                }
-                mentorSpinner = Mentor_Spinner(list1)
+                dialogView.vaqt.setSelection(position)
                 dialogView.mentor.adapter = mentorSpinner
+                dialogView.vaqt.adapter = timeSpinner
 
                 //settext
                 dialogView.guruh.setText(guruh.gr_name)
+
+
 
                 var indexMentor = -1
                 for (i in 0 until list1.size){
@@ -135,10 +136,10 @@ class ProccessFragment : Fragment() {
                 dialogView.mentor.setSelection(indexMentor)
 
 
-                dialogView.vaqt.adapter = timeSpinner
+
                 var indexTime = -1
-                for (i in 0 until timeList.size){
-                    if (timeList[i] == guruh.gr_time) {
+                for (i in 0 until t_List.size){
+                    if (t_List[i] == guruh.gr_time) {
                         indexTime = i
                         break
                     }
@@ -154,6 +155,9 @@ class ProccessFragment : Fragment() {
                     myDbHelper.updateGroup(guruh)
                     list[position] = guruh
                     groupRv.notifyDataSetChanged()
+
+
+
 
 
                     dialog.dismiss()
@@ -188,15 +192,13 @@ class ProccessFragment : Fragment() {
         groupList=myDbHelper.getAllGroup()
         list.clear()
         for (guruh in groupList) {
-            if (guruh.gr_kurs_id?.kurs_name==param1?.kurs_name){
+            if (guruh.gr_kurs_id?.kurs_name==param1?.kurs_name && guruh.gr_open == "process"){
                 list.add(guruh)
             }
         }
         groupRv.notifyDataSetChanged()
         groupRv.notifyItemInserted(list.size)
-//        list.addAll(myDbHelper.getAllGroup())
-//        groupRv.notifyDataSetChanged()
-//        groupRv.notifyItemInserted(list.size)
+
     }
 
     companion object {
