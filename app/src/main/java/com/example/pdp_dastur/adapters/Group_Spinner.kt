@@ -5,13 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import com.example.pdp_dastur.databinding.SpinnerGroupBinding
+import com.example.pdp_dastur.models.Guruh
 
-class Group_Spinner(var list: ArrayList<String>) : BaseAdapter() {
+class Group_Spinner(var list: List<Guruh>) : BaseAdapter() {
     override fun getCount(): Int {
         return list.size
     }
 
-    override fun getItem(position: Int): String {
+    override fun getItem(position: Int): Guruh {
         return list[position]
     }
 
@@ -19,7 +20,7 @@ class Group_Spinner(var list: ArrayList<String>) : BaseAdapter() {
         return position.toLong()
     }
 
-    override fun getView(p0: Int, convertView: View?, parent: ViewGroup?): View {
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var viewHolder:ViewHolder
         if (convertView==null){
             val binding =
@@ -28,7 +29,7 @@ class Group_Spinner(var list: ArrayList<String>) : BaseAdapter() {
         }else{
             viewHolder=ViewHolder(SpinnerGroupBinding.bind(convertView))
         }
-        viewHolder.spinnerGroupBinding.textSpinner.text=list[p0]
+        viewHolder.spinnerGroupBinding.textSpinner.text=list[position].gr_name
         return viewHolder.itemView
     }
 

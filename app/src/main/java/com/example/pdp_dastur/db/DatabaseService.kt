@@ -28,6 +28,7 @@ interface DatabaseService {
     fun updateCourse(kurs: Kurs):Int
 
     fun deleteStudent(talaba: Talaba)
+    fun deleteStudentsBygroup(guruh: Guruh)
     fun deleteGroup(guruh: Guruh)
     fun deleteMentor(mentor: Mentor)
     fun deleteCourse(kurs: Kurs)

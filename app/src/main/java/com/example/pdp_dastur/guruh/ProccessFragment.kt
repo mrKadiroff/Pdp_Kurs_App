@@ -21,6 +21,7 @@ import com.example.pdp_dastur.db.MyDbHelper
 import com.example.pdp_dastur.models.Guruh
 import com.example.pdp_dastur.models.Kurs
 import com.example.pdp_dastur.models.Mentor
+import com.example.pdp_dastur.models.Talaba
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -52,6 +53,8 @@ class ProccessFragment : Fragment() {
     lateinit var mentorList: List<Mentor>
     lateinit var timeSpinner: TimeSpinner
     lateinit var t_List: ArrayList<String>
+    lateinit var talabaList:ArrayList<Talaba>
+    lateinit var talab_list:ArrayList<Talaba>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,9 +63,21 @@ class ProccessFragment : Fragment() {
         binding = FragmentProccessBinding.inflate(layoutInflater,container, false)
         myDbHelper = MyDbHelper(binding.root.context)
 
+//        talaba list bn ishlash
+//        talabaList=myDbHelper.getAllStudent()
+//        talab_list = ArrayList()
+
+
+
+
+
+
+
+
         //mentor spinner
         mentorList = myDbHelper.getAllMentors()
         list1 = ArrayList()
+
 
         if (mentorList.isNotEmpty()){
             for (mentor in mentorList){
@@ -170,6 +185,9 @@ class ProccessFragment : Fragment() {
 
             override fun onItemDeleteClick(guruh: Guruh, position: Int, button: Button) {
                 myDbHelper.deleteGroup(guruh)
+
+                myDbHelper.deleteStudentsBygroup(guruh)
+
                 list.remove(guruh)
                 groupRv.notifyItemRemoved(position)
                 groupRv.notifyItemRangeChanged(position, list.size)

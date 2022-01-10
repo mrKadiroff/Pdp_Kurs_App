@@ -6,11 +6,18 @@ import android.widget.Button
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pdp_dastur.databinding.GrListBinding
 import com.example.pdp_dastur.models.Guruh
+import com.example.pdp_dastur.models.Talaba
+
+
+
 
 class Group_Rv(var list: List<Guruh>,var onItemClickListener: OnItemClickListener) :RecyclerView.Adapter<Group_Rv.Vh>(){
 
     inner class Vh(var grListBinding: GrListBinding) : RecyclerView.ViewHolder(grListBinding.root){
         fun onBind(guruh: Guruh){
+
+
+
             grListBinding.grName.text = guruh.gr_name
             grListBinding.startt.setOnClickListener {
                 onItemClickListener.onItemStartClick(guruh, position, grListBinding.startt)

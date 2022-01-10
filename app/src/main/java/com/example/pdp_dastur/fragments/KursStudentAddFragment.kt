@@ -7,15 +7,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.pdp_dastur.R
+import android.widget.AdapterView
+import android.widget.Toast
+import com.example.pdp_dastur.adapters.Group_Spinner
 import com.example.pdp_dastur.adapters.Mentor_Spinner
-import com.example.pdp_dastur.adapters.mentorAdapter
-import com.example.pdp_dastur.databinding.FragmentKursBinding
 import com.example.pdp_dastur.databinding.FragmentKursStudentAddBinding
 import com.example.pdp_dastur.db.MyDbHelper
+import com.example.pdp_dastur.models.Guruh
 import com.example.pdp_dastur.models.Kurs
 import com.example.pdp_dastur.models.Mentor
+import com.example.pdp_dastur.models.Talaba
 import java.util.*
+import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -45,6 +48,9 @@ class KursStudentAddFragment : Fragment() {
     lateinit var mentorList: List<Mentor>
     lateinit var myDbHelper: MyDbHelper
     lateinit var list: ArrayList<Mentor>
+    lateinit var groupSpinner: Group_Spinner
+    lateinit var groupList: List<Guruh>
+    lateinit var g_list: ArrayList<Guruh>
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +60,23 @@ class KursStudentAddFragment : Fragment() {
         binding = FragmentKursStudentAddBinding.inflate(layoutInflater,container,false)
         myDbHelper = MyDbHelper(binding.root.context)
         val kurs = arguments?.getSerializable("Qurs") as Kurs
+
+
+        //woroking with calendar
+        val cal = Calendar.getInstance()
+        val myYear = cal.get(Calendar.YEAR)
+        val myMonth = cal.get(Calendar.MONTH)
+        val day = cal.get(Calendar.DAY_OF_MONTH)
+
+
+        binding.sana.setOnClickListener {
+            val datePickerDialog = DatePickerDialog(binding.root.context,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                binding.sana.setText("Date:" + dayOfMonth + "/ " + (month +1) + "/ "+ year)
+            },myYear,myMonth,day)
+            datePickerDialog.show()
+        }
+
+        //working with mentor spinner
         mentorList = myDbHelper.getAllMentors()
         list = ArrayList()
 
@@ -68,22 +91,59 @@ class KursStudentAddFragment : Fragment() {
         mentorSpinner = Mentor_Spinner(list)
         binding.mentor.adapter = mentorSpinner
 
+        binding.mentor.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Toast.makeText(binding.root.context,list[position].mentor_name,Toast.LENGTH_LONG).show()
+
+                groupList = myDbHelper.getAllGroup()
+                g_list = ArrayList()
+
+
+                if (groupList.isNotEmpty()){
+                    for (guruh in groupList){
+                        if (guruh.gr_mentor_id?.mentor_name==list[position].mentor_name) {
+                            g_list.add(guruh)
+                        }
+                    }
+                }
+
+                //working with group spinner
 
 
 
-        //woroking with calendar
-        val cal = Calendar.getInstance()
-        val myYear = cal.get(Calendar.YEAR)
-        val myMonth = cal.get(Calendar.MONTH)
-        val day = cal.get(Calendar.DAY_OF_MONTH)
+                var mentorr = list[binding.mentor.selectedItemPosition]
 
 
-        binding.sana.setOnClickListener {
-            val datePickerDialog = DatePickerDialog(binding.root.context,DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
-              binding.sana.setText("Date:" + dayOfMonth + "/ " + (month +1) + "/ "+ year)
-            },myYear,myMonth,day)
-            datePickerDialog.show()
+                groupSpinner = Group_Spinner(g_list)
+                binding.guruh.adapter = groupSpinner
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
         }
+
+        binding.save.setOnClickListener {
+            val fam = binding.familiya.text.toString()
+            val imya = binding.ismii.text.toString()
+            val otchestva = binding.otcc.text.toString()
+            val sana = binding.sana.text.toString()
+            val guruh = g_list[binding.guruh.selectedItemPosition]
+            val talaba = Talaba(fam,imya,otchestva,sana,guruh)
+            myDbHelper.insertStudent(talaba)
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 

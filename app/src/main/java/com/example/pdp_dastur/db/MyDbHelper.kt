@@ -184,6 +184,7 @@ class MyDbHelper(context: Context) :
     }
 
     override fun getGroupById(id: Int): Guruh {
+        var guruh=Guruh()
         val database = this.readableDatabase
         val cursor = database.query(
             Constant.GURUH_TABLE,
@@ -197,46 +198,35 @@ class MyDbHelper(context: Context) :
                 Constant.GR_OPEN
             ),
             "${Constant.GURUH_ID} = ?",
-            arrayOf(id.toString()),
+            arrayOf("$id"),
             null,
             null,
             null,
             null
         )
-        cursor?.moveToFirst()
-        val guruh = Guruh()
-        guruh.id = cursor.getInt(0)
-        guruh.gr_name = cursor.getString(1)
-        guruh.gr_kurs_id = getCourseById(cursor.getInt(2))
-        guruh.gr_mentor_id = getMentorById(cursor.getInt(3))
-        guruh.gr_time = cursor.getString(4)
-        guruh.gr_days = cursor.getString(5)
-        guruh.gr_open = cursor.getString(6)
+        if (cursor!=null && cursor.count>0){
+            cursor.moveToFirst()
+            guruh.id = cursor.getInt(0)
+            guruh.gr_name = cursor.getString(1)
+            guruh.gr_kurs_id = getCourseById(cursor.getInt(2))
+            guruh.gr_mentor_id = getMentorById(cursor.getInt(3))
+            guruh.gr_time = cursor.getString(4)
+            guruh.gr_days = cursor.getString(5)
+            guruh.gr_open = cursor.getString(6)
+
+        }
+
         return guruh
     }
 
     override fun getGroupByType(isOpen: String): ArrayList<Guruh> {
         var list = ArrayList<Guruh>()
-//        val query =
-//            "select * from ${Constant.GURUH_TABLE} where ${Constant.GR_OCHILDI}=$isOpen"
-//        val database = this.readableDatabase
-//        val cursor = database.rawQuery(query, null)
-//        if (cursor.moveToFirst()) {
-//           do {
-//               val guruh = Guruh()
-//               guruh.id = cursor.getInt(0)
-//               guruh.gr_name = cursor.getString(1)
-//               guruh.gr_kurs_id = getCourseById(cursor.getInt(2))
-//               guruh.gr_mentor_id = cursor.getString(3)
-//               guruh.gr_time = cursor.getString(4)
-//               guruh.gr_days = cursor.getString(5)
-//               list.add(guruh)
-//           }while (cursor.moveToNext())
-//        }
+
         return list
     }
 
     override fun getMentorById(id: Int): Mentor {
+        val mentor = Mentor()
         val database = this.readableDatabase
         val cursor = database.query(
             Constant.MENTOR_TABLE,
@@ -255,13 +245,14 @@ class MyDbHelper(context: Context) :
             null,
             null
         )
-        cursor?.moveToFirst()
-        val mentor = Mentor()
-        mentor.id = cursor.getInt(0)
-        mentor.mentor_surname = cursor.getString(1)
-        mentor.mentor_name = cursor.getString(2)
-        mentor.mentor_otch = cursor.getString(3)
-        mentor.mentor_kurs_id = getCourseById(cursor.getInt(4))
+        if (cursor!=null && cursor.count>0){
+            cursor.moveToFirst()
+            mentor.id = cursor.getInt(0)
+            mentor.mentor_surname = cursor.getString(1)
+            mentor.mentor_name = cursor.getString(2)
+            mentor.mentor_otch = cursor.getString(3)
+            mentor.mentor_kurs_id = getCourseById(cursor.getInt(4))
+        }
         return mentor
     }
 
@@ -337,6 +328,12 @@ class MyDbHelper(context: Context) :
         val database = this.writableDatabase
         database.delete(Constant.TALABA_TABLE, "${Constant.TALABA_ID} = ?", arrayOf("${talaba.id}"))
         database.close()
+    }
+
+    override fun deleteStudentsBygroup(guruh: Guruh) {
+        val db = this.writableDatabase
+        db.delete("talaba", "tb_guruh=?", arrayOf("${guruh}"))
+        db.close()
     }
 
     override fun deleteGroup(guruh: Guruh) {
