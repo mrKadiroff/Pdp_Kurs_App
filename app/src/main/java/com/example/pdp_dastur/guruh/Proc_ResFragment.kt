@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.pdp_dastur.R
@@ -80,14 +81,14 @@ class Proc_ResFragment : Fragment() {
             }
         }
 
-        binding.groupNumber.text = list.size.toString()
+        binding.groupNumber.text = "O'quvchilar soni: ${list.size.toString()} ta"
 
 
 
 
 
         talabaAdapter = Talaba_Adapter(list, object : Talaba_Adapter.OnItemClickListener{
-            override fun onEditClick(talaba: Talaba, position: Int, button: Button) {
+            override fun onEditClick(talaba: Talaba, position: Int, linearLayout: LinearLayout) {
                 var bundle = Bundle()
                 bundle.putString("edit","edit")
                 bundle.putSerializable("talaba",guruuh)
@@ -96,7 +97,7 @@ class Proc_ResFragment : Fragment() {
 
             }
 
-            override fun onDeleteClick(talaba: Talaba, position: Int, button: Button) {
+            override fun onDeleteClick(talaba: Talaba, position: Int, linearLayout: LinearLayout) {
 
                 val builder = AlertDialog.Builder(binding.root.context)
                 builder.setMessage("Ushbu o'quvchini rostan o'chirmoqchimisiz?")
@@ -105,6 +106,7 @@ class Proc_ResFragment : Fragment() {
                     list.remove(talaba)
                     talabaAdapter.notifyItemRemoved(position)
                     talabaAdapter.notifyItemRangeChanged(position, list.size)
+                    binding.groupNumber.text = "O'quvchilar soni: ${list.size.toString()} ta"
                 })
                 builder.setNegativeButton("Yo'q", { dialogInterface: DialogInterface, i: Int ->
 
@@ -163,6 +165,13 @@ class Proc_ResFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val guruuh = arguments?.getSerializable("pro") as Guruh
+        binding.tooolbarchik.title = guruuh.gr_name
+
     }
 
     companion object {

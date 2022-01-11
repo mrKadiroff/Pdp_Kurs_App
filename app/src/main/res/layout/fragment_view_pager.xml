@@ -14,13 +14,13 @@
         app:title="app nomi"
         app:titleTextColor="@color/white"
         app:navigationIcon="@drawable/ic_vector__2_"
-        android:background="#2C3468"/>
+        android:background="#0A252F"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="#2C3468"
+        android:background="#0A252F"
         app:tabIndicatorColor="@color/white"
         app:tabTextColor="@color/white"/>
 

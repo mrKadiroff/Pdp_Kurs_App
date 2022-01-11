@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
@@ -7,95 +7,219 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.KursStudentAddFragment">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_child"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="#283593"
         app:navigationIcon="@drawable/ic_vector__2_"
         app:titleTextColor="@color/white"
         app:title="Talaba qo'shish"
+        android:layout_height="?actionBarSize"
+        android:background="@color/black"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
+        android:inputType="textCapSentences"
         android:id="@+id/familiya"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="12dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/tahrirlash"
-        android:hint="Familiya"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/edit_style"
+        android:hint="Familyasi"
         android:padding="10dp"
-        android:textSize="20sp"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/ismii"
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_child"
+        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="0.8" />
 
     <EditText
+        android:inputType="textCapSentences"
         android:id="@+id/ismii"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="12dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/tahrirlash"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_style"
         android:hint="Ismi"
         android:padding="10dp"
-        android:textSize="20sp"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/otcc"
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/familiya"
+        app:layout_constraintWidth_percent="0.8" />
 
     <EditText
+        android:inputType="textCapSentences"
         android:id="@+id/otcc"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="12dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/tahrirlash"
-        android:hint="Ismi"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_style"
+        android:hint="Otasining ismi"
         android:padding="10dp"
-        android:textSize="20sp"
-        />
+        app:layout_constraintBottom_toTopOf="@+id/sana"
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ismii"
+        app:layout_constraintWidth_percent="0.8" />
 
-    <EditText
+    <TextView
         android:id="@+id/sana"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="12dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/tahrirlash"
-        android:hint="30/12/2021"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_style"
+        android:drawableRight="@drawable/ic_vectorkalendar"
+        android:hint="18/10/2021"
+        android:gravity="center_vertical"
         android:padding="10dp"
-        android:textSize="20sp"
-
-        />
+        android:textSize="17dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/mentor"
+        app:layout_constraintHeight_percent="0.09"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/otcc"
+        app:layout_constraintWidth_percent="0.8"
+        android:drawableEnd="@drawable/ic_vectorkalendar"/>
 
     <Spinner
         android:id="@+id/mentor"
-        android:layout_width="match_parent"
-        android:background="@drawable/tahrirlash"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="10dp"
+        android:layout_width="0dp"
         android:layout_height="?actionBarSize"
         android:layout_marginTop="10dp"
-        />
+        android:background="@drawable/edit_style"
+        app:layout_constraintBottom_toTopOf="@+id/guruh"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sana"
+        app:layout_constraintWidth_percent="0.8" />
 
     <Spinner
         android:id="@+id/guruh"
-        android:layout_width="match_parent"
-        android:background="@drawable/tahrirlash"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
+        android:layout_width="0dp"
         android:layout_height="?actionBarSize"
         android:layout_marginTop="10dp"
-        />
-
+        android:background="@drawable/edit_style"
+        app:layout_constraintBottom_toTopOf="@+id/save"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mentor"
+        app:layout_constraintWidth_percent="0.8" />
 
     <Button
         android:id="@+id/save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
         android:text="Saqlash"
-        android:layout_gravity="end"
-        android:layout_margin="12dp"/>
+        android:backgroundTint="@color/black"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.08"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.4" />
 
 
 
-</LinearLayout>
+
+    <!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar_child"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        android:background="#283593"-->
+<!--        app:navigationIcon="@drawable/ic_vector__2_"-->
+<!--        app:titleTextColor="@color/white"-->
+<!--        app:title="Talaba qo'shish"-->
+<!--        app:layout_constraintTop_toTopOf="parent"/>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/familiya"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_margin="12dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:background="@drawable/tahrirlash"-->
+<!--        android:hint="Familiya"-->
+<!--        android:padding="10dp"-->
+<!--        android:textSize="20sp"-->
+<!--        />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/ismii"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_margin="12dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:background="@drawable/tahrirlash"-->
+<!--        android:hint="Ismi"-->
+<!--        android:padding="10dp"-->
+<!--        android:textSize="20sp"-->
+<!--        />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/otcc"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_margin="12dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:background="@drawable/tahrirlash"-->
+<!--        android:hint="Ismi"-->
+<!--        android:padding="10dp"-->
+<!--        android:textSize="20sp"-->
+<!--        />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/sana"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_margin="12dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:background="@drawable/tahrirlash"-->
+<!--        android:hint="30/12/2021"-->
+<!--        android:padding="10dp"-->
+<!--        android:textSize="20sp"-->
+
+<!--        />-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/mentor"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="@drawable/tahrirlash"-->
+<!--        android:layout_marginEnd="15dp"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        />-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/guruh"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="@drawable/tahrirlash"-->
+<!--        android:layout_marginEnd="15dp"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        />-->
+
+
+<!--    <Button-->
+<!--        android:id="@+id/save"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Saqlash"-->
+<!--        android:layout_gravity="end"-->
+<!--        android:layout_margin="12dp"/>-->
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

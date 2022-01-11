@@ -38,6 +38,7 @@ class MentorAddFragment : Fragment() {
 
     lateinit var binding: FragmentMentorAddBinding
     lateinit var myDbHelper: MyDbHelper
+    lateinit var mentorList:ArrayList<Mentor>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,18 +49,45 @@ class MentorAddFragment : Fragment() {
         var kurss = arguments?.getSerializable("kalit") as Kurs
         var orni = arguments?.getInt("pozit")
 
+        binding.toolbarMentor.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
         myDbHelper = MyDbHelper(binding.root.context)
+        mentorList=myDbHelper.getAllMentors()
 
         binding.add.setOnClickListener {
-            val familiya = binding.familyasi.text.toString()
-            val ismi = binding.ismi.text.toString()
-            val otchestva = binding.otchestva.text.toString()
+            var same = false
+            val familiya = binding.familyasi.text.toString().trim()
+            val ismi = binding.ismi.text.toString().trim()
+            val otchestva = binding.otchestva.text.toString().trim()
             val mentor = Mentor(familiya,ismi,otchestva,kurss)
-            myDbHelper.insertMentor(mentor)
+
+
+            if (familiya.isNotEmpty() && ismi.isNotEmpty() && otchestva.isNotEmpty()){
+                for (i in 0 until mentorList.size){
+                    if (mentorList[i].mentor_name == ismi){
+                        same = true
+                        break
+                    }
+                }
+                if (!same){
+                    myDbHelper.insertMentor(mentor)
+        findNavController().popBackStack()
+                    Toast.makeText(binding.root.context, "Ma'lumot saqlandi", Toast.LENGTH_SHORT).show()
+                }else{
+                    Toast.makeText(binding.root.context, "Bunday ismli mentor bor!!", Toast.LENGTH_SHORT).show()
+                    same=false
+                }
+
+            } else{
+                Toast.makeText(binding.root.context, "Malumot to'ldirilishi kerak", Toast.LENGTH_SHORT).show()
+            }
         }
 
 
-
+//        myDbHelper.insertMentor(mentor)
+//        findNavController().popBackStack()
 
 
         return binding.root

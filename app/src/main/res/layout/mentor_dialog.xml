@@ -52,12 +52,12 @@
             android:id="@+id/cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Bekor qilish"
+            android:text="Yopish"
             android:textSize="16sp"
             android:textColor="@color/black"
             android:layout_gravity="end"
             android:gravity="end"
-            android:layout_marginEnd="30sp"/>
+            android:layout_marginEnd="20sp"/>
 
         <TextView
             android:id="@+id/change"

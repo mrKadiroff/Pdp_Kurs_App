@@ -3,6 +3,7 @@ package com.example.pdp_dastur.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pdp_dastur.databinding.MentorRvBinding
 import com.example.pdp_dastur.models.Mentor
@@ -40,7 +41,7 @@ class mentorAdapter(var list: ArrayList<Mentor>, var onItemClickListener: OnItem
     override fun getItemCount(): Int = list.size
 
     interface OnItemClickListener{
-        fun onEditClick(mentor: Mentor, position: Int, button: Button)
-        fun onDeleteClick(mentor: Mentor, position: Int, button: Button)
+        fun onEditClick(mentor: Mentor, position: Int, linearLayout: LinearLayout)
+        fun onDeleteClick(mentor: Mentor, position: Int, linearLayout: LinearLayout)
     }
 }

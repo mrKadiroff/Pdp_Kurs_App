@@ -1,73 +1,207 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="@drawable/tahrirlash"
-    android:layout_marginTop="15dp"
-    android:layout_marginStart="12dp"
-    android:layout_marginEnd="12dp"
-    android:layout_height="wrap_content">
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_weight="1"
-        android:layout_height="match_parent">
-
-        <TextView
-            android:id="@+id/ismss"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:textSize="20dp"
-            android:layout_marginStart="10dp"
-            android:text="familiya ism"/>
-
-        <TextView
-            android:id="@+id/otests"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:textSize="20dp"
-            android:layout_marginStart="10dp"
-            android:text="otches"/>
-        <TextView
-            android:id="@+id/sanana"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="6dp"
-            android:textSize="20dp"
-            android:layout_marginBottom="12dp"
-            android:layout_marginStart="10dp"
-            android:text="Android"/>
-    </LinearLayout>
-
+    android:layout_height="100dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-        <Button
-            android:id="@+id/edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="edit"
-            android:layout_marginEnd="12dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="0dp">
 
-        <Button
-            android:id="@+id/delete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:text="delete"
-            android:layout_marginEnd="12dp"/>
+            <TextView
+                android:gravity="center_vertical"
+                android:id="@+id/ismss"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="@string/app_name"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:gravity="center_vertical"
+                    android:id="@+id/otests"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="Shuhrat o'g'li"
+                    android:textColor="@color/black"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/item_style"
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/item_style">
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:id="@+id/edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/item_style"
+                    android:backgroundTint="#FFB800"
+                    android:padding="15dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_vectorpencil" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:padding="3dp">
+
+                <LinearLayout
+                    android:id="@+id/delete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/item_style"
+                    android:backgroundTint="#D12424"
+                    android:padding="15dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_groupmusorr" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3.1"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/sanana"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="15dp"
+            android:text="12/12/2021"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginTop="3dp"
+        android:background="#DBDBDB" />
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_weight="1"-->
+<!--        android:layout_height="match_parent">-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/ismss"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="12dp"-->
+<!--            android:textSize="20dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:text="familiya ism"/>-->
+
+<!--        <TextView-->
+<!--            android:id="@+id/otests"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="6dp"-->
+<!--            android:textSize="20dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:text="otches"/>-->
+<!--        <TextView-->
+<!--            android:id="@+id/sanana"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="6dp"-->
+<!--            android:textSize="20dp"-->
+<!--            android:layout_marginBottom="12dp"-->
+<!--            android:layout_marginStart="10dp"-->
+<!--            android:text="Android"/>-->
+<!--    </LinearLayout>-->
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_weight="1"-->
+<!--        android:orientation="vertical">-->
+
+<!--        <Button-->
+<!--            android:id="@+id/edit"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="end"-->
+<!--            android:text="edit"-->
+<!--            android:layout_marginEnd="12dp"/>-->
+
+<!--        <Button-->
+<!--            android:id="@+id/delete"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_gravity="end"-->
+<!--            android:text="delete"-->
+<!--            android:layout_marginEnd="12dp"/>-->
+
+
+<!--    </LinearLayout>-->
 
 
 

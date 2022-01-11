@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.pdp_dastur.R
 import com.example.pdp_dastur.adapters.KursRvAdapter
@@ -61,6 +63,10 @@ class MentorFragment : Fragment() {
         val kurslar = arguments?.getSerializable("kurs") as Kurs
         val position = arguments?.getInt("position")
 
+        binding.toolbarMentor.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
         binding.toolbarMentor.title = kurslar.kurs_name
 
         mentorList=myDbHelper.getAllMentors()
@@ -73,9 +79,9 @@ class MentorFragment : Fragment() {
                 }
             }
         }
-
+        var same = false
         mentorsAdapter = mentorAdapter(list, object : mentorAdapter.OnItemClickListener{
-            override fun onEditClick(mentor: Mentor, position: Int, button: Button) {
+            override fun onEditClick(mentor: Mentor, position: Int, linearLayout: LinearLayout) {
                 val alertDialog = AlertDialog.Builder(binding.root.context)
                 val dialog = alertDialog.create()
                 val dialogView = MentorDialogBinding.inflate(
@@ -87,20 +93,51 @@ class MentorFragment : Fragment() {
                 dialogView.otchest.setText(mentor.mentor_otch)
 
                 dialogView.change.setOnClickListener {
-                    mentor.mentor_surname = dialogView.familya.text.toString()
-                    mentor.mentor_name = dialogView.imya.text.toString()
-                    mentor.mentor_otch = dialogView.otchest.text.toString()
-                    myDbHelper.updateMentor(mentor)
-                    list[position] = mentor
-                    mentorsAdapter.notifyItemChanged(position)
+                    val surName =dialogView.familya.text.toString().trim()
+                    val name = dialogView.imya.text.toString().trim()
+                    val fatherName = dialogView.otchest.text.toString().trim()
 
+                    mentor.mentor_surname = dialogView.familya.text.toString().trim()
+                    mentor.mentor_name = dialogView.imya.text.toString().trim()
+                    mentor.mentor_otch = dialogView.otchest.text.toString().trim()
+
+                    if (surName.isNotEmpty() && name.isNotEmpty() && fatherName.isNotEmpty()){
+                        for (mentor in list){
+                            if (mentor.mentor_name == name){
+                                myDbHelper.updateMentor(mentor)
+                                list[position] = mentor
+                                mentorsAdapter.notifyItemChanged(position)
+                                dialog.dismiss()
+                            }
+                        }
+
+
+
+
+
+
+
+
+
+
+                    }else{
+                        Toast.makeText(binding.root.context,"Malumot to'liq kiritng iltimos", Toast.LENGTH_SHORT).show()
+                    }
+
+
+
+
+                }
+
+                dialogView.cancel.setOnClickListener {
+                    dialog.dismiss()
                 }
 
                 dialog.setView(dialogView.root)
                 dialog.show()
             }
 
-            override fun onDeleteClick(mentor: Mentor, position: Int, button: Button) {
+            override fun onDeleteClick(mentor: Mentor, position: Int, linearLayout: LinearLayout) {
                 myDbHelper.deleteMentor(mentor)
                 list.remove(mentor)
                 mentorsAdapter.notifyItemRemoved(list.size)

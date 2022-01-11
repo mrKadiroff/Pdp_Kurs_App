@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.pdp_dastur.R
 import com.example.pdp_dastur.adapters.Mentor_Spinner
@@ -58,6 +59,10 @@ class GroupAddFragment : Fragment() {
 
         binding.toolbarGr.title = kursa.kurs_name
 
+        binding.toolbarGr.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+
 
         groupList=myDbHelper.getAllGroup()
         //mentor spinner
@@ -85,15 +90,32 @@ class GroupAddFragment : Fragment() {
         binding.days.adapter = adapter_kun
 
         //add qilish
+        var same = false
         binding.saqlash.setOnClickListener {
-            val gr_name = binding.grNomi.text.toString()
+            val gr_name = binding.grNomi.text.toString().trim()
             val mentor = list[binding.mentorName.selectedItemPosition]
-            val time = binding.timee.selectedItem.toString()
-            val dayss = binding.days.selectedItem.toString()
+            val time = binding.timee.selectedItem.toString().trim()
+            val dayss = binding.days.selectedItem.toString().trim()
             val guruh = Guruh(gr_name,kursa,mentor,time,dayss,"process")
-            myDbHelper.insertGroup(guruh)
-            groupList.add(guruh)
-            findNavController().popBackStack()
+            if (gr_name.isNotEmpty() && mentor.mentor_name!="" && mentor.mentor_surname!="" && time.isNotEmpty() && dayss.isNotEmpty()){
+                for (i in 0 until groupList.size){
+                    if (groupList[i].gr_name == gr_name){
+                        same = true
+                        break
+                    }
+                }
+                if (!same){
+                    myDbHelper.insertGroup(guruh)
+                    groupList.add(guruh)
+                    findNavController().popBackStack()
+                }else{
+                    Toast.makeText(binding.root.context, "Bunday nomli guruh bor!!", Toast.LENGTH_SHORT).show()
+                    same=false
+                }
+            }else{
+                Toast.makeText(binding.root.context,"Malumot to'liq kiritng iltimos", Toast.LENGTH_SHORT).show()
+            }
+
 
         }
 

@@ -10,7 +10,7 @@
         android:id="@+id/toolbar_mentor"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="#283593"
+        android:background="#0A252F"
         app:navigationIcon="@drawable/ic_vector__2_"
         app:titleTextColor="@color/white"
         app:title="Barcha kurslar ro'yxati"
@@ -21,6 +21,7 @@
         android:id="@+id/rv_mentor"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        tools:listitem="@layout/mentor_rv"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_mentor" />

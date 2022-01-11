@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.pdp_dastur.R
 import com.example.pdp_dastur.adapters.Group_Rv
@@ -63,9 +65,9 @@ class ProccessFragment : Fragment() {
         binding = FragmentProccessBinding.inflate(layoutInflater,container, false)
         myDbHelper = MyDbHelper(binding.root.context)
 
-//        talaba list bn ishlash
-//        talabaList=myDbHelper.getAllStudent()
-//        talab_list = ArrayList()
+
+        talabaList=myDbHelper.getAllStudent()
+        talab_list = ArrayList()
 
 
 
@@ -112,8 +114,8 @@ class ProccessFragment : Fragment() {
         timeSpinner = TimeSpinner(t_List)
 
 
-        groupRv = Group_Rv(list, object : Group_Rv.OnItemClickListener{
-            override fun onItemStartClick(guruh: Guruh, position: Int, button: Button) {
+        groupRv = Group_Rv(list,talabaList, object : Group_Rv.OnItemClickListener{
+            override fun onItemStartClick(guruh: Guruh, position: Int, linearLayout: LinearLayout) {
                 var bundle = Bundle()
                 bundle.putString("yet", "yet")
                 bundle.putSerializable("pro",guruh)
@@ -125,7 +127,7 @@ class ProccessFragment : Fragment() {
 
 
             @SuppressLint("NotifyDataSetChanged")
-            override fun onItemEditClick(guruh: Guruh, position: Int, button: Button) {
+            override fun onItemEditClick(guruh: Guruh, position: Int, linearLayout: LinearLayout) {
                 val alertDialog = AlertDialog.Builder(binding.root.context)
                 val dialog = alertDialog.create()
                 val dialogView = MyEditDialogBinding.inflate(
@@ -163,18 +165,24 @@ class ProccessFragment : Fragment() {
 
                 //update
                 dialogView.saveText.setOnClickListener {
+                    val name = dialogView.guruh.text.toString().trim()
+                    val mantor = list1[dialogView.mentor.selectedItemPosition]
+                    val time = dialogView.vaqt.selectedItem.toString().trim()
 
-                    guruh.gr_name = dialogView.guruh.text.toString()
-                    guruh.gr_mentor_id =list1[dialogView.mentor.selectedItemPosition]
-                    guruh.gr_time = dialogView.vaqt.selectedItem.toString()
-                    myDbHelper.updateGroup(guruh)
-                    list[position] = guruh
-                    groupRv.notifyDataSetChanged()
+                    if (name.isNotEmpty() && mantor != null && time.isNotEmpty()){
+                        guruh.gr_name = dialogView.guruh.text.toString().trim()
+                        guruh.gr_mentor_id =list1[dialogView.mentor.selectedItemPosition]
+                        guruh.gr_time = dialogView.vaqt.selectedItem.toString().trim()
+                        myDbHelper.updateGroup(guruh)
+                        list[position] = guruh
+                        groupRv.notifyDataSetChanged()
+                        dialog.dismiss()
+                    }else{
+                        Toast.makeText(binding.root.context,"Malumot to'liq kiritng iltimos", Toast.LENGTH_SHORT).show()
+                    }
 
-
-
-
-
+                }
+                dialogView.notText.setOnClickListener {
                     dialog.dismiss()
                 }
 
@@ -183,7 +191,7 @@ class ProccessFragment : Fragment() {
                 dialog.show()
             }
 
-            override fun onItemDeleteClick(guruh: Guruh, position: Int, button: Button) {
+            override fun onItemDeleteClick(guruh: Guruh, position: Int, linearLayout: LinearLayout) {
                 myDbHelper.deleteGroup(guruh)
 
                 myDbHelper.deleteStudentsBygroup(guruh)

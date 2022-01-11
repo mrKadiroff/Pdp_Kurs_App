@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -11,56 +11,163 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/tooolbarchik"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
-        app:title="app nomi"
+        android:layout_height="?actionBarSize"
+        android:background="#0A252F"
         app:titleTextColor="@color/white"
+        app:title="Android Development"
         app:navigationIcon="@drawable/ic_vector__2_"
-        android:background="#2C3468"/>
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/liner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="15dp"
+        app:layout_constraintHeight_percent="0.2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tooolbarchik">
+
+        <TextView
+            android:id="@+id/group_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:text="PDP Android G-23"
+            android:textColor="@color/black"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/group_number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="O'quvchilar soni: 20 ta"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/group_time"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="Vaqti: 16:30-18:30"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
 
 
-    <TextView
-        android:id="@+id/group_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Guruh nomi"
-        android:textSize="20dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="12dp"/>
-
-    <TextView
-        android:id="@+id/group_number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="talabalar soni:"
-        android:textSize="20dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="12dp"/>
-
-    <TextView
-        android:id="@+id/group_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Guruh nomi"
-        android:layout_marginStart="10dp"
-        android:textSize="20dp"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="12dp"/>
+        </LinearLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/boshla"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="#0A252F"
+        android:text="Guruhga darsni boshlash"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintHeight_percent="0.075"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/liner"
+        app:layout_constraintWidth_percent="0.9" />
+
+
+    <TextView
+        android:id="@+id/text_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Darsni boshlash"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"/>
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="Barcha o'quvchilar ro'yxati"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boshla" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/talabalar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="15dp"
         tools:listitem="@layout/st_list"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text_title" />
 
-</LinearLayout>
+
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/tooolbarchik"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="60dp"-->
+<!--        app:title="app nomi"-->
+<!--        app:titleTextColor="@color/white"-->
+<!--        app:navigationIcon="@drawable/ic_vector__2_"-->
+<!--        android:background="#2C3468"/>-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/group_name"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Guruh nomi"-->
+<!--        android:textSize="20dp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginTop="12dp"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/group_number"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="talabalar soni:"-->
+<!--        android:textSize="20dp"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginTop="12dp"/>-->
+
+<!--    <TextView-->
+<!--        android:id="@+id/group_time"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Guruh nomi"-->
+<!--        android:layout_marginStart="10dp"-->
+<!--        android:textSize="20dp"-->
+<!--        android:layout_marginEnd="10dp"-->
+<!--        android:layout_marginTop="12dp"/>-->
+
+<!--    <Button-->
+<!--        android:id="@+id/boshla"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Darsni boshlash"-->
+<!--        android:layout_gravity="center"-->
+<!--        android:layout_margin="12dp"/>-->
+
+<!--    <androidx.recyclerview.widget.RecyclerView-->
+<!--        android:id="@+id/talabalar"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        tools:listitem="@layout/st_list"-->
+<!--        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

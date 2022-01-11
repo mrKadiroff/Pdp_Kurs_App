@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.pdp_dastur.R
 import com.example.pdp_dastur.databinding.FragmentGroupStudentAddBinding
@@ -67,13 +68,18 @@ class Group_Student_AddFragment : Fragment() {
 
         if (qosh!=null){
             binding.qoshish.setOnClickListener {
-                val fam = binding.famil.text.toString()
-                val imya = binding.ismiigu.text.toString()
-                val otch = binding.otasining.text.toString()
-                val sana = binding.datee.text.toString()
-                val talaba = Talaba(fam,imya,otch,sana,guruh)
-                myDbHelper.insertStudent(talaba)
-                findNavController().popBackStack()
+                val fam = binding.famil.text.toString().trim()
+                val imya = binding.ismiigu.text.toString().trim()
+                val otch = binding.otasining.text.toString().trim()
+                val sana = binding.datee.text.toString().trim()
+                if (fam.isNotEmpty() && imya.isNotEmpty()&&otch.isNotEmpty()&&sana.isNotEmpty()){
+                    val talaba = Talaba(fam,imya,otch,sana,guruh)
+                    myDbHelper.insertStudent(talaba)
+                    findNavController().popBackStack()
+                }else{
+                    Toast.makeText(binding.root.context,"Malumot to'liq kiritng iltimos",Toast.LENGTH_SHORT).show()
+                }
+
         }
 
 //            val bundle = Bundle()
@@ -97,13 +103,25 @@ class Group_Student_AddFragment : Fragment() {
             //update
 
             binding.qoshish.setOnClickListener {
+                val fam = binding.famil.text.toString().trim()
+                val imya = binding.ismiigu.text.toString().trim()
+                val otch = binding.otasining.text.toString().trim()
+                val sana = binding.datee.text.toString().trim()
 
-                student.talaba_surname = binding.famil.text.toString()
-                student.talaba_name = binding.ismiigu.text.toString()
-                student.talaba_otch = binding.otasining.text.toString()
-                student.talaba_date = binding.datee.text.toString()
-                myDbHelper.updateStudent(student)
-                findNavController().popBackStack()
+
+                if (fam.isNotEmpty() && imya.isNotEmpty()&&otch.isNotEmpty()&&sana.isNotEmpty()){
+                    student.talaba_surname = binding.famil.text.toString().trim()
+                    student.talaba_name = binding.ismiigu.text.toString().trim()
+                    student.talaba_otch = binding.otasining.text.toString().trim()
+                    student.talaba_date = binding.datee.text.toString().trim()
+                    myDbHelper.updateStudent(student)
+                    findNavController().popBackStack()
+                }else{
+                    Toast.makeText(binding.root.context,"Malumot to'liq kiritng iltimos",Toast.LENGTH_SHORT).show()
+                }
+
+
+
             }
         }
 

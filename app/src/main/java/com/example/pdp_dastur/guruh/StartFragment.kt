@@ -7,6 +7,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import com.example.pdp_dastur.R
 import com.example.pdp_dastur.adapters.Group_Rv
@@ -18,6 +20,7 @@ import com.example.pdp_dastur.db.MyDbHelper
 import com.example.pdp_dastur.models.Guruh
 import com.example.pdp_dastur.models.Kurs
 import com.example.pdp_dastur.models.Mentor
+import com.example.pdp_dastur.models.Talaba
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -49,6 +52,8 @@ class StartFragment : Fragment() {
     lateinit var mentorList: List<Mentor>
     lateinit var timeSpinner: TimeSpinner
     lateinit var t_List: ArrayList<String>
+    lateinit var talabaList:ArrayList<Talaba>
+    lateinit var talab_list:ArrayList<Talaba>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -56,6 +61,12 @@ class StartFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentStartBinding.inflate(layoutInflater, container, false)
         myDbHelper = MyDbHelper(binding.root.context)
+
+
+        talabaList=myDbHelper.getAllStudent()
+        talab_list = ArrayList()
+
+
 
         //mentor spinner
         mentorList = myDbHelper.getAllMentors()
@@ -89,15 +100,15 @@ class StartFragment : Fragment() {
         t_List.add("19:00 - 21:00")
         timeSpinner = TimeSpinner(t_List)
 
-        groupRv = Group_Rv(list, object : Group_Rv.OnItemClickListener{
-            override fun onItemStartClick(guruh: Guruh, position: Int, button: Button) {
+        groupRv = Group_Rv(list,talabaList, object : Group_Rv.OnItemClickListener{
+            override fun onItemStartClick(guruh: Guruh, position: Int, linearLayout: LinearLayout) {
                 var bundle = Bundle()
                 bundle.putString("start", "start")
                 bundle.putSerializable("pro",guruh)
                 findNavController().navigate(R.id.proc_ResFragment,bundle)
             }
 
-            override fun onItemEditClick(guruh: Guruh, position: Int, button: Button) {
+            override fun onItemEditClick(guruh: Guruh, position: Int, linearLayout: LinearLayout) {
                 val alertDialog = AlertDialog.Builder(binding.root.context)
                 val dialog = alertDialog.create()
                 val dialogView = MyEditDialogBinding.inflate(
@@ -135,18 +146,26 @@ class StartFragment : Fragment() {
 
                 //update
                 dialogView.saveText.setOnClickListener {
+                    val name = dialogView.guruh.text.toString().trim()
+                    val mantor = list1[dialogView.mentor.selectedItemPosition]
+                    val time = dialogView.vaqt.selectedItem.toString().trim()
 
-                    guruh.gr_name = dialogView.guruh.text.toString()
-                    guruh.gr_mentor_id =list1[dialogView.mentor.selectedItemPosition]
-                    guruh.gr_time = dialogView.vaqt.selectedItem.toString()
-                    myDbHelper.updateGroup(guruh)
-                    list[position] = guruh
-                    groupRv.notifyDataSetChanged()
+                    if (name.isNotEmpty() && mantor != null && time.isNotEmpty()){
+                        guruh.gr_name = dialogView.guruh.text.toString().trim()
+                        guruh.gr_mentor_id =list1[dialogView.mentor.selectedItemPosition]
+                        guruh.gr_time = dialogView.vaqt.selectedItem.toString().trim()
+                        myDbHelper.updateGroup(guruh)
+                        list[position] = guruh
+                        groupRv.notifyDataSetChanged()
+                        dialog.dismiss()
 
+                    }else{
+                        Toast.makeText(binding.root.context,"Malumot to'liq kiritng iltimos", Toast.LENGTH_SHORT).show()
+                    }
 
+                }
 
-
-
+                dialogView.notText.setOnClickListener {
                     dialog.dismiss()
                 }
 
@@ -155,7 +174,7 @@ class StartFragment : Fragment() {
                 dialog.show()
             }
 
-            override fun onItemDeleteClick(guruh: Guruh, position: Int, button: Button) {
+            override fun onItemDeleteClick(guruh: Guruh, position: Int, linearLayout: LinearLayout) {
                 myDbHelper.deleteGroup(guruh)
                 list.remove(guruh)
                 groupRv.notifyItemRemoved(position)

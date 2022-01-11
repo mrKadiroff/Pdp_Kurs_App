@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,69 +7,160 @@
     android:orientation="vertical"
     tools:context=".fragments.GroupAddFragment">
 
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar_gr"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="#283593"
         app:navigationIcon="@drawable/ic_vector__2_"
+        app:title="Yangi guruh qo'shish"
         app:titleTextColor="@color/white"
-        app:title="Barcha kurslar ro'yxati"
+        android:background="#0A252F"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <EditText
+        android:inputType="textCapSentences"
         android:id="@+id/gr_nomi"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="12dp"
-        android:layout_marginTop="15dp"
-        android:background="@drawable/tahrirlash"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/edit_style"
         android:hint="Guruh nomi"
         android:padding="10dp"
-        android:textSize="20sp"
-
-        />
+        app:layout_constraintBottom_toTopOf="@+id/mentor_name"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_gr"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintWidth_percent="0.85" />
 
     <Spinner
         android:id="@+id/mentor_name"
-        android:layout_width="match_parent"
-        android:background="@drawable/tahrirlash"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_height="?actionBarSize"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_style"
+        app:layout_constraintBottom_toTopOf="@+id/timee"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gr_nomi"
+        app:layout_constraintWidth_percent="0.85" />
 
     <Spinner
         android:id="@+id/timee"
-        android:layout_width="match_parent"
-        android:background="@drawable/tahrirlash"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_height="?actionBarSize"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_style"
+        app:layout_constraintBottom_toTopOf="@+id/days"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mentor_name"
+        app:layout_constraintWidth_percent="0.85" />
 
     <Spinner
         android:id="@+id/days"
-        android:layout_width="match_parent"
-        android:background="@drawable/tahrirlash"
-        android:layout_marginEnd="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="10dp"
-        android:layout_height="?actionBarSize"
-        android:layout_marginTop="10dp"
-        />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edit_style"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timee"
+        app:layout_constraintWidth_percent="0.85" />
 
     <Button
         android:id="@+id/saqlash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="12dp"
-        android:text="Saqlash"/>
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#0A252F"
+        android:text="Saqlash"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHeight_percent="0.075"
+        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintWidth_percent="0.45" />
 
 
-</LinearLayout>
+
+
+
+
+
+
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:id="@+id/toolbar_gr"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        android:background="#283593"-->
+<!--        app:navigationIcon="@drawable/ic_vector__2_"-->
+<!--        app:titleTextColor="@color/white"-->
+<!--        app:title="Barcha kurslar ro'yxati"-->
+<!--        app:layout_constraintTop_toTopOf="parent"/>-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/gr_nomi"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_margin="12dp"-->
+<!--        android:layout_marginTop="15dp"-->
+<!--        android:background="@drawable/tahrirlash"-->
+<!--        android:hint="Guruh nomi"-->
+<!--        android:padding="10dp"-->
+<!--        android:textSize="20sp"-->
+
+<!--        />-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/mentor_name"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="@drawable/tahrirlash"-->
+<!--        android:layout_marginEnd="15dp"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        />-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/timee"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="@drawable/tahrirlash"-->
+<!--        android:layout_marginEnd="15dp"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        />-->
+
+<!--    <Spinner-->
+<!--        android:id="@+id/days"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:background="@drawable/tahrirlash"-->
+<!--        android:layout_marginEnd="15dp"-->
+<!--        android:layout_marginStart="15dp"-->
+<!--        android:layout_marginBottom="10dp"-->
+<!--        android:layout_height="?actionBarSize"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        />-->
+
+<!--    <Button-->
+<!--        android:id="@+id/saqlash"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_gravity="end"-->
+<!--        android:layout_margin="12dp"-->
+<!--        android:text="Saqlash"/>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

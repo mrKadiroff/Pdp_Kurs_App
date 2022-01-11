@@ -83,13 +83,43 @@ class KursFragment : Fragment() {
                     val dialogView =
                         MyDialogBinding.inflate(LayoutInflater.from(binding.root.context),null,false)
 
+
+                    var same = false
                     dialogView.saveText.setOnClickListener {
-                        val name = dialogView.sarlavha.text.toString()
-                        val description = dialogView.matn.text.toString()
+                        val name = dialogView.sarlavha.text.toString().trim()
+                        val description = dialogView.matn.text.toString().trim()
                         val kurs = Kurs(name,description)
-                        myDbHelper.insertCourse(kurs)
-                        kurslist.add(kurs)
-                        kursAdapter.notifyItemInserted(kurslist.size)
+
+
+
+
+
+                        if (name.isNotEmpty() && description.isNotEmpty()){
+                            for (i in 0 until kurslist.size){
+                                if (kurslist[i].kurs_name == name){
+                                    same = true
+                                    break
+                                }
+                            }
+                            if (!same) {
+                                myDbHelper.insertCourse(kurs)
+                                kurslist.add(kurs)
+                                kursAdapter.notifyItemInserted(kurslist.size)
+                                dialog.dismiss()
+                            }else{
+                                Toast.makeText(binding.root.context, "Bunday nomli kurs bor!!", Toast.LENGTH_SHORT).show()
+                                same=false
+                            }
+
+
+                        }else{
+                            Toast.makeText(binding.root.context,"Ma'lumotlarni to'liq kiritmadingizku brat",Toast.LENGTH_SHORT).show()
+                        }
+
+                    }
+
+                    dialogView.notText.setOnClickListener {
+                        dialog.dismiss()
                     }
 
 

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import com.example.pdp_dastur.adapters.Group_Spinner
 import com.example.pdp_dastur.adapters.Mentor_Spinner
 import com.example.pdp_dastur.databinding.FragmentKursStudentAddBinding
@@ -61,7 +62,9 @@ class KursStudentAddFragment : Fragment() {
         myDbHelper = MyDbHelper(binding.root.context)
         val kurs = arguments?.getSerializable("Qurs") as Kurs
 
-
+        binding.toolbarChild.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
         //woroking with calendar
         val cal = Calendar.getInstance()
         val myYear = cal.get(Calendar.YEAR)
@@ -101,7 +104,7 @@ class KursStudentAddFragment : Fragment() {
 
                 if (groupList.isNotEmpty()){
                     for (guruh in groupList){
-                        if (guruh.gr_mentor_id?.mentor_name==list[position].mentor_name) {
+                        if (guruh.gr_kurs_id?.kurs_name==kurs.kurs_name && guruh.gr_mentor_id?.mentor_name==list[position].mentor_name && guruh.gr_open == "process") {
                             g_list.add(guruh)
                         }
                     }
@@ -126,13 +129,21 @@ class KursStudentAddFragment : Fragment() {
         }
 
         binding.save.setOnClickListener {
-            val fam = binding.familiya.text.toString()
-            val imya = binding.ismii.text.toString()
-            val otchestva = binding.otcc.text.toString()
-            val sana = binding.sana.text.toString()
+            val fam = binding.familiya.text.toString().trim()
+            val imya = binding.ismii.text.toString().trim()
+            val otchestva = binding.otcc.text.toString().trim()
+            val sana = binding.sana.text.toString().trim()
             val guruh = g_list[binding.guruh.selectedItemPosition]
             val talaba = Talaba(fam,imya,otchestva,sana,guruh)
-            myDbHelper.insertStudent(talaba)
+            if (fam.isNotEmpty() && imya.isNotEmpty() && otchestva.isNotEmpty() && sana.isNotEmpty()){
+                myDbHelper.insertStudent(talaba)
+                Toast.makeText(binding.root.context,"Muvaffaqiyatli saqlandi",Toast.LENGTH_SHORT).show()
+                findNavController().popBackStack()
+            }else{
+                Toast.makeText(binding.root.context,"Ma'lumotlarni to'liq kiritmadingizku brat",Toast.LENGTH_SHORT).show()
+            }
+
+
         }
 
 

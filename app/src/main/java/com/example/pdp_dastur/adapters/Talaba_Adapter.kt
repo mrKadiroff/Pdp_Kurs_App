@@ -3,6 +3,7 @@ package com.example.pdp_dastur.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pdp_dastur.databinding.MentorRvBinding
 import com.example.pdp_dastur.databinding.StListBinding
@@ -43,7 +44,7 @@ class Talaba_Adapter (var list: ArrayList<Talaba>, var onItemClickListener: OnIt
     override fun getItemCount(): Int = list.size
 
     interface OnItemClickListener{
-        fun onEditClick(talaba: Talaba, position: Int, button: Button)
-        fun onDeleteClick(talaba: Talaba, position: Int, button: Button)
+        fun onEditClick(talaba: Talaba, position: Int, linearLayout: LinearLayout)
+        fun onDeleteClick(talaba: Talaba, position: Int, linearLayout: LinearLayout)
     }
 }
